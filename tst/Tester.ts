@@ -4,7 +4,7 @@
  *
  * */
 
-import test, * as TST from '@typescriptlibs/tst';
+import test, { Tester } from '@typescriptlibs/tst';
 
 /* *
  *
@@ -13,8 +13,8 @@ import test, * as TST from '@typescriptlibs/tst';
  * */
 
 test('Tester tests', function (assert: test.Assert) {
-    assert(
-        typeof TST.Tester === 'function',
+    assert.ok(
+        typeof Tester === 'function',
         'Tester should be a class constructor.'
     );
 });
