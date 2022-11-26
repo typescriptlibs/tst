@@ -1,0 +1,12 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../tst-run/",
+        "paths": {
+            "@typescriptlibs/tst": [
+                "../lib/index.d.ts",
+                "../src/index.ts"
+            ]
+        }
+    }
+}

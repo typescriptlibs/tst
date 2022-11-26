@@ -2,6 +2,7 @@
     "private": true,
     "author": "TypeScriptLibs and Contributors",
     "description": "TypeScript Tester",
+    "homepage": "https://www.typescriptlibs.org/",
     "license": "MIT",
     "name": "@typescriptlibs/tst",
     "type": "module",
@@ -9,23 +10,17 @@
     "bin": "bin/tst.mjs",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
-    "bugs": "https://github.com/typescriptlibs/tst/issues",
-    "homepage": "https://github.com/typescriptlibs/tst#readme",
-    "repository": "https://github.com/typescriptlibs/tst.git",
-    "dependencies": {
-        "@types/node": "^16.18.3",
-        "yargs": "^17.6.2"
+    "bugs": {
+        "url": "https://github.com/typescriptlibs/tst/issues"
     },
     "devDependencies": {
+        "@types/node": "^10.17.60",
         "@types/yargs": "^17.0.14",
         "@typescriptlibs/tst": "file:./",
         "typescript": "^4.9.3"
     },
-    "peerDependencies": {
-        "typescript": ">= 1.6.x"
-    },
     "engines": {
-        "node": ">=16.8.0"
+        "node": ">=10.17.0"
     },
     "files": [
         "bin/",
@@ -33,8 +28,17 @@
         "LICENSE.txt",
         "README.md"
     ],
+    "peerDependencies": {
+        "@types/node": ">=10.17.0",
+        "typescript": ">=1.6.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/typescriptlibs/tst.git"
+    },
     "scripts": {
         "build": "tsc -p src/",
+        "clean": "rm -rf lib tst-run",
         "test": "tst tst/",
         "watch": "tsc -b src/ -w"
     }
