@@ -4,7 +4,7 @@
  *
  * */
 
-import * as Assert from 'assert';
+import { strict as Assert } from 'assert';
 
 /* *
  *
@@ -12,7 +12,7 @@ import * as Assert from 'assert';
  *
  * */
 
-export class Tester<T = unknown> {
+export class Tester<T = any> {
 
     /* *
      *
@@ -20,7 +20,7 @@ export class Tester<T = unknown> {
      *
      * */
 
-    public static readonly defaultSession = new Tester(Assert);
+    public static readonly default: Tester<Tester.DefaultAssert> = new Tester<Tester.DefaultAssert>(Assert);
 
     /* *
      *
@@ -42,7 +42,7 @@ export class Tester<T = unknown> {
 
     public readonly assert: T;
 
-    public readonly errors: Array<[string, unknown]> = [];
+    public readonly errors: Array<[string, any]> = [];
 
     public readonly successes: Array<string> = [];
 
@@ -54,9 +54,8 @@ export class Tester<T = unknown> {
      *
      * */
 
-    public start(
-        verbose?: boolean
-    ): void {
+    public async start (): Promise<void> {
+        const assert = this.assert;
         const errors = this.errors;
         const successes = this.successes;
 
@@ -70,10 +69,10 @@ export class Tester<T = unknown> {
             title = `#${++testCounter}: ${test[0]}`;
 
             try {
-                result = testCode();
+                result = testCode(assert);
 
                 if (result instanceof Promise) {
-                    result
+                    await result
                         .then(() => successes.push(title))
                         .catch((error) => errors.push([title, error]));
                 }
@@ -85,27 +84,32 @@ export class Tester<T = unknown> {
                 errors.push([title, error]);
             }
         }
-
-        if (!verbose) {
-            return;
-        }
-
-        for (const success of successes) {
-            console.log('✅', success);
-        }
-
-        for (const error of errors) {
-            console.log('🛑', error[0]);
-            console.error(error[1]);
-        }
     }
 
-    public test(
+    public test (
         description: string,
-        testCode: (assert: T) => unknown
-    ): void {
+        testCode: (assert: T) => any
+    ): asserts testCode {
         this.tests.push([description, testCode]);
     }
+
+}
+
+/* *
+ *
+ *  Class Namespace
+ *
+ * */
+
+export namespace Tester {
+
+    /* *
+     *
+     *  Declarations
+     *
+     * */
+
+    export type DefaultAssert = typeof Assert;
 
 }
 

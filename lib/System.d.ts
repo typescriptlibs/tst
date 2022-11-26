@@ -1,0 +1,21 @@
+declare function dirname(path: string): string;
+declare function exec(command: string): Promise<string>;
+declare function extractPackageVersion(packagePath?: string): string;
+declare function fileExits(filePath: string): boolean;
+declare function getFiles(folderPath: string, positivePattern?: RegExp, negativePattern?: RegExp): Array<string>;
+declare function join(...paths: Array<string>): string;
+declare function pathFromURL(fileURL: string): string;
+export declare const System: {
+    CWD: string;
+    EOL: string;
+    PATH: string;
+    VERSION: string;
+    dirname: typeof dirname;
+    exec: typeof exec;
+    extractPackageVersion: typeof extractPackageVersion;
+    fileExits: typeof fileExits;
+    getFiles: typeof getFiles;
+    join: typeof join;
+    pathFromURL: typeof pathFromURL;
+};
+export default System;

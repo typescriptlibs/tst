@@ -1,13 +1,16 @@
 /// <reference types="node" />
-import * as Assert from 'assert';
-export declare class Tester<T = unknown> {
-    static readonly defaultSession: Tester<typeof Assert>;
+import { strict as Assert } from 'assert';
+export declare class Tester<T = any> {
+    static readonly default: Tester<Tester.DefaultAssert>;
     constructor(assert: T);
     readonly assert: T;
-    readonly errors: Array<[string, unknown]>;
+    readonly errors: Array<[string, any]>;
     readonly successes: Array<string>;
     readonly tests: Array<[string, Function]>;
-    start(verbose?: boolean): void;
-    test(description: string, testCode: (assert: T) => unknown): void;
+    start(): Promise<void>;
+    test(description: string, testCode: (assert: T) => any): asserts testCode;
+}
+export declare namespace Tester {
+    type DefaultAssert = typeof Assert;
 }
 export default Tester;
