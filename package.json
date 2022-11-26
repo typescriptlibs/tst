@@ -39,6 +39,7 @@
     "scripts": {
         "build": "tsc -p src/",
         "clean": "rm -rf lib tst-run",
+        "release": "npm publish --access public",
         "test": "tst tst/",
         "watch": "tsc -b src/ -w"
     }
