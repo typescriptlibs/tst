@@ -54,19 +54,20 @@ export class CLI {
      * */
 
     public async run (): Promise<void> {
+        const argv = this.argv;
         const system = this.system;
 
         if (
-            this.argv.includes('-h') ||
-            this.argv.includes('--help')
+            argv.includes('-h') ||
+            argv.includes('--help')
         ) {
             console.info(CLI.HELP.join(system.EOL));
             return;
         }
 
         if (
-            this.argv.includes('-v') ||
-            this.argv.includes('--version')
+            argv.includes('-v') ||
+            argv.includes('--version')
         ) {
             console.info(CLI.VERSION);
             return;
@@ -86,10 +87,23 @@ export class CLI {
 
         try {
             console.info(`Testing ${this.source}...`);
-            const result = await System.exec(`npx tsc -p ${source}`);
-            console.info(result);
 
-            const files = System.getFiles(target, /\.js$/);
+            const result = await System.exec(`npx tsc -p ${source}`);
+
+            if (result) {
+                console.info(result);
+            }
+
+            let files: Array<string> = [];
+
+            if (argv.includes('--only')) {
+                const file = argv[argv.indexOf('--only') + 1];
+
+                files = [ ( file.endsWith('.js') ? file : `${file}.js` ) ]
+            }
+            else {
+                files = System.getFiles(target, /\.js$/);
+            }
 
             for (const file of files) {
                 await import(System.join(System.CWD, target, file));
@@ -99,14 +113,24 @@ export class CLI {
 
             await tester.start();
 
-            for (const success of tester.successes) {
-                console.log('✅', success);
+            if (argv.includes('--verbose')) {
+                for (const success of tester.successes) {
+                    console.info('✅', success);
+                }
+                for (const error of tester.errors) {
+                    console.error('🛑', error[0]);
+                    console.error(error[1]);
+                }
+            }
+
+            console.info('✅ COMPLETED:', tester.successes.length)
+
+            if (tester.errors.length) {
+                console.error('🛑 FAILED:', tester.errors.length);
+
+                process.exit(1);
             }
     
-            for (const error of tester.errors) {
-                console.log('🛑', error[0]);
-                console.error(error[1]);
-            }
         }
         catch (error) {
             console.error(error);
@@ -157,6 +181,8 @@ export namespace CLI {
         'OPTIONS:',
         '',
         '  --help, -h     Prints this help text.',
+        '',
+        '  --only [path]  Runs a single test in [source].',
         '',
         '  --verbose      Prints this help text.',
         '',

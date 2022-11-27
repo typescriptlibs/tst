@@ -6,7 +6,7 @@
     "license": "MIT",
     "name": "@typescriptlibs/tst",
     "type": "module",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "bin": "bin/tst.mjs",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
@@ -40,7 +40,7 @@
         "build": "tsc -p src/",
         "clean": "rm -rf lib tst-run",
         "release": "npm publish --access public",
-        "test": "tst tst/",
+        "test": "tst --verbose tst/",
         "watch": "tsc -b src/ -w"
     }
 }
