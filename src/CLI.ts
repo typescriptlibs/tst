@@ -184,7 +184,7 @@ export namespace CLI {
         '',
         '  --only [path]  Runs a single test in [source].',
         '',
-        '  --verbose      Prints this help text.',
+        '  --verbose      Prints test details.',
         '',
         '  --version, -v  Prints the version string.',
         '',
