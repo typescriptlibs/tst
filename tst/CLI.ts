@@ -12,7 +12,7 @@ import test, { CLI, System } from '@typescriptlibs/tst';
  *
  * */
 
-test('CLI tests', function (assert: test.Assert) {
+test('CLI tests', (assert: test.Assert) => {
     assert.strictEqual(
         CLI.VERSION,
         `Version ${System.VERSION}`,
