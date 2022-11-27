@@ -18,6 +18,8 @@ The following versions of tsl-apple-cloudkit are currently being supported with 
 Reporting a Vulnerability
 -------------------------
 
+**Please do not report security vulnerabilities through public GitHub issues.**
+
 Send a detailed description of the security issue to typescriptlibs.org under the `security` handle.
 
 When typescriptlibs.org receives a secruity report, the review process will take about four weeks.
