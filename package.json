@@ -25,7 +25,8 @@
     "files": [
         "bin/",
         "lib/",
-        "LICENSE.txt",
+        "AUTHORS.md",
+        "LICENSE.md",
         "README.md"
     ],
     "peerDependencies": {

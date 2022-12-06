@@ -1,0 +1,38 @@
+# GitHub Pages config
+
+title: TypeScript Tester
+description: TypeScript Tester
+author: © TypeScriptLibs and Contributors
+email: bug@typescriptlibs.org
+github_username:  typescriptlibs
+rss: rss
+
+show_excerpts: false
+
+github:
+  private: true
+
+header_pages:
+  - SECURITY.md
+  - LICENSE.md
+  - _config.md
+
+include:
+  - LICENSE.md
+  - _config.md
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-titles-from-headings
+
+theme: minima
+
+minima:
+  date_format: "%Y-%m-%d"
+  skin: classic
+
+titles_from_headings:
+  enabled: true
+  strip_title: true
+  collections: true
