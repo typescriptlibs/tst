@@ -86,11 +86,17 @@ export class CLI {
         const target = TSConfig.extractOutDir(source) || source;
 
         try {
+            if (argv.includes('--reset')) {
+                console.info(`Reset ${target}...`);
+
+                System.deleteFolder(target);
+            }
+
             console.info(`Testing ${this.source}...`);
 
-            const result = await System.exec(`npx tsc -p ${source}`);
+            const result = System.exec(`npx tsc -p ${source}`);
 
-            if (result) {
+            if (argv.includes('--verbose') && result.trim()) {
                 console.info(result);
             }
 
@@ -102,11 +108,12 @@ export class CLI {
                 files = [ ( file.endsWith('.js') ? file : `${file}.js` ) ]
             }
             else {
-                files = System.getFiles(target, /\.js$/);
+                files = System.filesFrom(target, /\.js$/);
             }
 
+            // @todo parallel mode to test atomic
             for (const file of files) {
-                await import(System.join(System.CWD, target, file));
+                await import(System.joinPath(System.CWD, target, file));
             }
 
             const tester = Tester.default;
@@ -183,6 +190,8 @@ export namespace CLI {
         '  --help, -h     Prints this help text.',
         '',
         '  --only [path]  Runs a single test in [source].',
+        '',
+        '  --reset        Compiles into an empty TypeScript target.',
         '',
         '  --verbose      Prints test details.',
         '',

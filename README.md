@@ -21,6 +21,8 @@ Command Line Options
 
 * --only [path] : Runs a single test in [source].
 
+* --reset       : Compiles into an empty TypeScript target.
+
 * --verbose     : Prints test details.
 
 * --version, -v : Prints the version string.

@@ -24,7 +24,7 @@ const CWD = process.cwd();
 
 const EOL = OS.EOL;
 
-const PATH = join(dirname(pathFromURL(import.meta.url)), '..');
+const PATH = joinPath(folderName(pathFromURL(import.meta.url)), '..');
 
 const VERSION = extractPackageVersion();
 
@@ -34,29 +34,27 @@ const VERSION = extractPackageVersion();
  *
  * */
 
-function dirname (
+function deleteFolder (
     path: string
-): string {
-    return Path.dirname(path);
+): void {
+
+    for (const file of filesFrom(path)) {
+        FS.unlinkSync(joinPath(path, file));
+    }
+
+    for (const folder of foldersFrom(path)) {
+        FS.rmdirSync(joinPath(path, folder));
+    }
 }
 
 function exec (
     command: string
-): Promise<string> {
-    return new Promise((resolve, reject) => {
-        ChildProcess.exec(command, (error, stdout, stderr) => {
-            if (error) {
-                reject(stderr || stdout || error);
-            }
-            else {
-                resolve(stdout);
-            }
-        });
-    });
+): string {
+    return ChildProcess.execSync(command, { encoding: 'utf8', timeout: 60000 });
 }
 
 function extractPackageVersion (
-    packagePath: string = Path.join(PATH, 'package.json')
+    packagePath: string = joinPath(PATH, 'package.json')
 ): string {
     const packageJSON = JSON.parse(FS.readFileSync(packagePath).toString());
 
@@ -69,7 +67,7 @@ function fileExits (
     return FS.lstatSync(filePath).isFile();
 }
 
-function getFiles (
+function filesFrom (
     folderPath: string,
     positivePattern?: RegExp,
     negativePattern?: RegExp
@@ -98,17 +96,56 @@ function getFiles (
             continue;
         }
 
-        const subFiles = getFiles(name);
-
-        for (const file of subFiles) {
-            files.push(join(name, file));
+        for (const file of filesFrom(joinPath(folderPath, name))) {
+            files.push(joinPath(name, file));
         }
     }
 
     return files;
 }
 
-function join (
+function folderName (
+    path: string
+): string {
+    return Path.dirname(path);
+}
+
+function foldersFrom (
+    folderPath: string,
+    positivePattern?: RegExp,
+    negativePattern?: RegExp
+): Array<string> {
+    const items = FS.readdirSync(folderPath, { withFileTypes: true }).sort();
+    const folders: Array<string> = [];
+
+    let name: string;
+
+    for (const item of items) {
+        name = item.name;
+
+        if (item.isDirectory()) {
+
+            if (
+                positivePattern &&
+                !positivePattern.test(name) ||
+                negativePattern &&
+                negativePattern.test(name)
+            ) {
+                continue;
+            }
+
+            folders.push(name);
+
+            for (const folder of foldersFrom(joinPath(folderPath, name))) {
+                folders.push(joinPath(name, folder));
+            }
+        }
+    }
+
+    return folders;
+}
+
+function joinPath (
     ...paths: Array<string>
 ): string {
     return Path.join(...paths);
@@ -131,12 +168,13 @@ export const System = {
     EOL,
     PATH,
     VERSION,
-    dirname,
+    deleteFolder,
     exec,
     extractPackageVersion,
     fileExits,
-    getFiles,
-    join,
+    filesFrom,
+    folderName,
+    joinPath,
     pathFromURL,
 };
 
