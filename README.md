@@ -1,7 +1,8 @@
 TST: TypeScript Tester
 ======================
 
-Simple testing tool to run and test TypeScript code in combination with assertion libraries.
+Simple testing tool to run and test TypeScript code in combination with
+assertion libraries.
 
 
 
@@ -34,7 +35,7 @@ Examples
 
 Install the testing tool.
 ```sh
-npm install @typescriptlibs/tst
+$ npm install @typescriptlibs/tst
 ```
 
 Import the default test function in the following pattern. If you like to use a
