@@ -111,12 +111,18 @@ export class CLI {
                 files = System.filesFrom(target, /\.js$/);
             }
 
+            const tester = Tester.default;
+            const errors = tester.errors;
+
             // @todo parallel mode to test atomic
             for (const file of files) {
-                await import(System.joinPath(System.CWD, target, file));
+                try {
+                    await import(System.joinPath(System.CWD, target, file));
+                }
+                catch (error) {
+                    errors.push([file, error]);
+                }
             }
-
-            const tester = Tester.default;
 
             await tester.start();
 
