@@ -1,7 +1,7 @@
 # GitHub Pages config
 
 title: TypeScript Tester
-description: TypeScript Tester
+description: A simple testing tool to run and test TypeScript code.
 author: © TypeScriptLibs and Contributors
 email: bug@typescriptlibs.org
 github_username:  typescriptlibs
@@ -15,11 +15,11 @@ github:
 header_pages:
   - SECURITY.md
   - LICENSE.md
-  - _/all-libraries.md
+  - www/all-libraries.md
 
 include:
   - LICENSE.md
-  - _/all-libraries.md
+  - www/all-libraries.md
 
 plugins:
   - jekyll-feed
