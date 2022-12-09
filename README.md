@@ -32,9 +32,13 @@ Command Line Options
 Examples
 --------
 
+Install the testing tool.
+```sh
+npm install @typescriptlibs/tst
+```
+
 Import the default test function in the following pattern. If you like to use a
 custom assert library, you can ignore the assert argument.
-
 ```ts
 import test from '@typescriptlibs/tst';
 
@@ -60,7 +64,7 @@ test('Test the timeout function.', async (assert: test.Assert) => {
 });
 ```
 
-Compiles, loads and runs assertion tests in the "tests" folder.
+Compile, load and run assertion tests in the "tests" folder.
 ```sh
-$ tst tests/
+$ npx tst tests/
 ```
