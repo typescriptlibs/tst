@@ -38,6 +38,10 @@ function deleteFolder (
     path: string
 ): void {
 
+    if (!FS.existsSync(path)) {
+        return;
+    }
+
     for (const file of filesFrom(path)) {
         FS.unlinkSync(joinPath(path, file));
     }
