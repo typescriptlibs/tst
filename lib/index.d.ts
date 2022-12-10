@@ -1,6 +1,7 @@
 import Tester from './Tester.js';
-declare const test: typeof Tester.default.test;
-declare namespace test {
+export declare const run: typeof Tester.default.run;
+export declare const test: typeof Tester.default.test;
+export declare namespace test {
     type Assert = Tester.DefaultAssert;
 }
 export * from './CLI.js';

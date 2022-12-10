@@ -8,6 +8,7 @@ export declare class Tester<T = any> {
     readonly successes: Array<string>;
     readonly tests: Array<[string, Function]>;
     start(): Promise<void>;
+    run(testCode: (assert: T) => any): asserts testCode;
     test(description: string, testCode: (assert: T) => any): asserts testCode;
 }
 export declare namespace Tester {

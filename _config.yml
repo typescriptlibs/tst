@@ -3,11 +3,10 @@
 title: TypeScript Tester
 description: A simple testing tool to run and test TypeScript code.
 author: © TypeScriptLibs and Contributors
+
 email: bug@typescriptlibs.org
 github_username:  typescriptlibs
 rss: rss
-
-show_excerpts: false
 
 github:
   private: true
@@ -25,6 +24,8 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-titles-from-headings
+
+show_excerpts: false
 
 theme: minima
 
