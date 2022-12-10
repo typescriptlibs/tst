@@ -86,6 +86,12 @@ export class Tester<T = any> {
         }
     }
 
+    public run (
+        testCode: (assert: T) => any
+    ): asserts testCode {
+        this.tests.push(['run', testCode]);
+    }
+
     public test (
         description: string,
         testCode: (assert: T) => any

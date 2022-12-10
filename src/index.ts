@@ -12,7 +12,9 @@ import Tester from './Tester.js';
  *
  * */
 
-const test: typeof Tester.default.test = Tester.default.test.bind(Tester.default);
+export const run: typeof Tester.default.run = Tester.default.run.bind(Tester.default);
+
+export const test: typeof Tester.default.test = Tester.default.test.bind(Tester.default);
 
 /* *
  *
@@ -20,7 +22,7 @@ const test: typeof Tester.default.test = Tester.default.test.bind(Tester.default
  *
  * */
 
-namespace test {
+export namespace test {
 
     /* *
      *
