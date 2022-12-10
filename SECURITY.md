@@ -20,7 +20,7 @@ Reporting a Vulnerability
 
 **Please do not report security vulnerabilities through public GitHub issues.**
 
-Send a detailed description of the security issue to typescriptlibs.org under the `security` handle.
+Send a detailed description of the security issue to typescriptlibs.org under the `security@` handle.
 
 When typescriptlibs.org receives a secruity report, the review process will take about four weeks.
 We might ask for more details or assistence in understanding the security impact.
