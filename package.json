@@ -43,6 +43,7 @@
         "clean": "rm -rf lib tst-run",
         "release": "npm publish --access public",
         "test": "npm run build && tst --reset --verbose tst/",
+        "test:ci": "tst --reset --verbose tst/",
         "watch": "tsc -b src/ -w"
     }
 }
