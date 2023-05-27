@@ -65,7 +65,7 @@ function extractPackageVersion (
     return ( packageJSON?.version || '0.0.0' );
 }
 
-function fileExits (
+function fileExists (
     filePath: string
 ): boolean {
     return FS.lstatSync(filePath).isFile();
@@ -175,7 +175,7 @@ export const System = {
     deleteFolder,
     exec,
     extractPackageVersion,
-    fileExits,
+    fileExists,
     filesFrom,
     folderName,
     joinPath,

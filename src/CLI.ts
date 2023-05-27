@@ -1,3 +1,15 @@
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TST: TypeScript Tester
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License; you may not use this file except in
+  compliance with the License. You may obtain a copy of the MIT License at
+  https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+
 /* *
  *
  *  Imports
@@ -79,7 +91,7 @@ export class CLI {
             source = Path.join(source, 'tsconfig.json');
         }
 
-        if (!system.fileExits(source)) {
+        if (!system.fileExists(source)) {
             throw new Error(`TSConfig not found. (${source})`);
         }
 
@@ -181,7 +193,7 @@ export namespace CLI {
     export const VERSION = `Version ${System.extractPackageVersion()}`;
 
     export const HELP = [
-        `tst: The TypeScript Tester - ${VERSION}`,
+        `TST: TypeScript Tester - ${VERSION}`,
         '',
         `tst [options] [source]`,
         '',

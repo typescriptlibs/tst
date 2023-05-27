@@ -1,2 +1,2 @@
-TypeScript Tester is authored by:
+TST is authored by:
 * Sophie Bremer

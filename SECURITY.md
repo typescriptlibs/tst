@@ -6,7 +6,7 @@ Security Policy
 Supported Versions
 ------------------
 
-The following versions of tsl-apple-cloudkit are currently being supported with security updates.
+The following versions of TST are currently being supported with security updates.
 
 | Version | Supported |
 | ------- | --------- |

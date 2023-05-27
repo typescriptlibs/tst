@@ -10,8 +10,8 @@ If you have a *question*, please use [Stack Overflow](https://stackoverflow.com/
 ## 2. Did you find a bug? ##
 
 When logging a bug, please be sure to include the following:
- * What version of TSL-Mastodon-API you're using (run `npm list @typescriptlibs/tst`)
- * What version of TypeScript you're using (run `tsc --v`)
+ * What version of TST you're using (run `npm list @typescriptlibs/tst`)
+ * What version of TypeScript you're using (run `npx tsc --v`)
  * If at all possible, an *isolated* way to reproduce the behavior
  * The behavior you expect to see, and the actual behavior
 
