@@ -1,8 +1,22 @@
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TST: TypeScript Tester
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License. 
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+
+
 /* *
  *
  *  Imports
  *
  * */
+
 
 import * as ChildProcess from 'child_process';
 
@@ -14,11 +28,13 @@ import * as Path from 'path';
 
 import * as URL from 'url';
 
+
 /* *
  *
  *  Constants
  *
  * */
+
 
 const CWD = process.cwd();
 
@@ -28,11 +44,13 @@ const PATH = joinPath(folderName(pathFromURL(import.meta.url)), '..');
 
 const VERSION = extractPackageVersion();
 
+
 /* *
  *
  *  Functions
  *
  * */
+
 
 function deleteFolder (
     path: string
@@ -51,11 +69,13 @@ function deleteFolder (
     }
 }
 
+
 function exec (
     command: string
 ): string {
     return ChildProcess.execSync(command, { encoding: 'utf8', timeout: 60000 });
 }
+
 
 function extractPackageVersion (
     packagePath: string = joinPath(PATH, 'package.json')
@@ -65,11 +85,13 @@ function extractPackageVersion (
     return ( packageJSON?.version || '0.0.0' );
 }
 
+
 function fileExists (
     filePath: string
 ): boolean {
     return FS.lstatSync(filePath).isFile();
 }
+
 
 function filesFrom (
     folderPath: string,
@@ -108,11 +130,13 @@ function filesFrom (
     return files;
 }
 
+
 function folderName (
     path: string
 ): string {
     return Path.dirname(path);
 }
+
 
 function foldersFrom (
     folderPath: string,
@@ -149,11 +173,13 @@ function foldersFrom (
     return folders;
 }
 
+
 function joinPath (
     ...paths: Array<string>
 ): string {
     return Path.join(...paths);
 }
+
 
 function pathFromURL (
     fileURL: string
@@ -161,11 +187,13 @@ function pathFromURL (
     return URL.fileURLToPath(fileURL);
 }
 
+
 /* *
  *
  *  Default Export
  *
  * */
+
 
 export const System = {
     CWD,
@@ -181,5 +209,6 @@ export const System = {
     joinPath,
     pathFromURL,
 };
+
 
 export default System;
