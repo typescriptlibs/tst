@@ -1,10 +1,25 @@
+/*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*!*\
+
+  TST: TypeScript Tester
+
+  Copyright (c) TypeScriptLibs and Contributors
+
+  Licensed under the MIT License.
+  You may not use this file except in compliance with the License. 
+  You can get a copy of the License at https://typescriptlibs.org/LICENSE.txt
+
+\*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*i*/
+
+
 /* *
  *
  *  Imports
  *
  * */
 
+
 import { strict as Assert } from 'assert';
+
 
 /* *
  *
@@ -12,7 +27,9 @@ import { strict as Assert } from 'assert';
  *
  * */
 
+
 export class Tester<T = any> {
+
 
     /* *
      *
@@ -20,7 +37,9 @@ export class Tester<T = any> {
      *
      * */
 
+
     public static readonly default: Tester<Tester.DefaultAssert> = new Tester<Tester.DefaultAssert>(Assert);
+
 
     /* *
      *
@@ -28,11 +47,13 @@ export class Tester<T = any> {
      *
      * */
 
+
     public constructor(
         assert: T
     ) {
         this.assert = assert;
     }
+
 
     /* *
      *
@@ -40,13 +61,17 @@ export class Tester<T = any> {
      *
      * */
 
+
     public readonly assert: T;
 
-    public readonly errors: Array<[string, any]> = [];
+    public readonly errors: Array<Tester.Result> = [];
 
-    public readonly successes: Array<string> = [];
+    public file: string = '';
 
-    public readonly tests: Array<[string, Function]> = [];
+    public readonly successes: Array<Tester.Result> = [];
+
+    public readonly tests: Array<Tester.Test> = [];
+
 
     /* *
      *
@@ -54,52 +79,77 @@ export class Tester<T = any> {
      *
      * */
 
+
     public async start (): Promise<void> {
         const assert = this.assert;
         const errors = this.errors;
         const successes = this.successes;
 
-        let result: unknown;
-        let testCode: Function;
+        let result: Promise<unknown>;
         let testCounter = 0;
         let title: string;
 
         for (const test of this.tests) {
-            testCode = test[1];
-            title = `#${++testCounter}: ${test[0]}`;
+            title = `#${++testCounter}`;
+
+            if (test.title) {
+                title += `: ${test.title}`;
+            }
 
             try {
-                result = testCode(assert);
+                result = test.code(assert);
 
-                if (result instanceof Promise) {
-                    await result
-                        .then(() => successes.push(title))
-                        .catch((error) => errors.push([title, error]));
+                if (!(result instanceof Promise)) {
+                    result = Promise.resolve();
                 }
-                else {
-                    successes.push(title);
-                }
+
+                await result
+                    .then(() => successes.push({
+                        file: test.file,
+                        title
+                    }))
+                    .catch((error) => errors.push({
+                        error,
+                        file: test.file,
+                        title
+                    }));
             }
             catch (error) {
-                errors.push([title, error]);
+                errors.push({
+                    error,
+                    file: test.file,
+                    title
+                });
             }
         }
     }
 
+
     public run (
         testCode: (assert: T) => any
     ): asserts testCode {
-        this.tests.push(['run', testCode]);
+        this.tests.push({
+            code: testCode,
+            file: this.file,
+            title: ''
+        });
     }
+
 
     public test (
         description: string,
         testCode: (assert: T) => any
     ): asserts testCode {
-        this.tests.push([description, testCode]);
+        this.tests.push({
+            code: testCode,
+            file: this.file,
+            title: description
+        });
     }
 
+
 }
+
 
 /* *
  *
@@ -107,7 +157,9 @@ export class Tester<T = any> {
  *
  * */
 
+
 export namespace Tester {
+
 
     /* *
      *
@@ -115,14 +167,30 @@ export namespace Tester {
      *
      * */
 
+
     export type DefaultAssert = typeof Assert;
 
+    export interface Result {
+        error?: unknown;
+        file: string;
+        title: string;
+    }
+
+    export interface Test {
+        code: Function;
+        file: string;
+        title: string;
+    }
+
+
 }
+
 
 /* *
  *
  *  Default Export
  *
  * */
+
 
 export default Tester;
