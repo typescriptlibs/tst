@@ -154,13 +154,18 @@ export class CLI {
 
             await tester.start();
 
-            if (argv.includes('--verbose')) {
+            const verbose = argv.includes('--verbose');
+
+            if (verbose) {
                 for (const success of tester.successes) {
                     console.info('✅', success.title);
                 }
-                for (const error of tester.errors) {
-                    console.error('🛑', error.title);
-                    console.error('Failed in', error.file);
+            }
+
+            for (const error of tester.errors) {
+                console.error('🛑', error.title);
+                console.error('Failed in', error.file);
+                if (verbose) {
                     console.error(error.error);
                 }
             }
