@@ -16,7 +16,7 @@ test('Test the timeout function.', async (assert: test.Assert) => {
     const delta = Date.now() - time;
 
     assert.ok(
-        delta > 100,
+        delta >= 100,
         `The timeout should fire after 100 milliseconds. (${delta})`
     );
 });
