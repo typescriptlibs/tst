@@ -2,7 +2,7 @@
     "private": true,
     "author": "TypeScriptLibs and Contributors",
     "description": "TypeScript Tester",
-    "homepage": "https://www.typescriptlibs.org/",
+    "homepage": "https://typescriptlibs.eu/",
     "license": "MIT",
     "name": "@typescriptlibs/tst",
     "type": "module",
