@@ -35,8 +35,8 @@ In general, things we find useful when reviewing suggestions are:
 
 ## Code of Conduct ##
 
-This project has adopted a [Code of Conduct](https://typescriptlibs.org/CONDUCT.pdf).
-Please contact <conduct@typescriptlibs.org> with any questions or comments.
+This project has adopted a [Code of Conduct](https://typescriptlibs.eu/CONDUCT.pdf).
+Please contact <conduct@typescriptlibs.eu> with any questions or comments.
 
 
 ## Contributing bug fixes ##
@@ -61,7 +61,7 @@ You will need to complete a Contributor License Agreement (CLA).
 Briefly, this agreement testifies that you are granting us permission to use the submitted change according to the terms of the project's license, and that the work being submitted is under appropriate copyright.
 
 Please submit a Contributor License Agreement (CLA) before submitting a pull request.
-You may print the agreement ([Contribution License Agreement](https://typescriptlibs.org/CLA.pdf), sign, scan, and email it back to <cla@typescriptlibs.org>.
+You may print the agreement ([Contribution License Agreement](https://typescriptlibs.eu/CLA.pdf), sign, scan, and email it back to <cla@typescriptlibs.eu>.
 Be sure to include your github user name along with the agreement.
 Once we have received the signed CLA, we'll review the request.
 
@@ -82,3 +82,4 @@ Your pull request should:
   * Include baseline changes with your change
   * All changed code must have 100% code coverage
 * To avoid line ending issues, set `autocrlf = input` and `whitespace = cr-at-eol` in your git configuration
+
